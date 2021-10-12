@@ -9,6 +9,15 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
+       
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16.4
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
       - name: setup-python 3.9.0
         uses: ./
         with:
@@ -17,14 +26,6 @@ jobs:
       - name: Run simple code
         run: python -c 'import math; print(math.factorial(5))'
         
-      - name: Install Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.16.4
-
-      - name: Checkout code
-        uses: actions/checkout@v2
-
       - name: Fetch required Go modules
         run:  go mod download
 
